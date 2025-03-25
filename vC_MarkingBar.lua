@@ -19,7 +19,7 @@ function vC_MB_MarkingBar()
 	end
 end
 -------------------------------------------------------
--- Marking Bar Frame and Icons
+-- Quick and Simple Tooltips
 -------------------------------------------------------
 function vC_MB_ToolTips(f, c, a1)
 	GameTooltip:ClearLines()
@@ -31,9 +31,16 @@ function vC_MB_ToolTips(f, c, a1)
 	GameTooltip:AddLine(a1)
 	GameTooltip:Show()
 end
+-------------------------------------------------------
+-- Marking Bar Frame and Icons
+-------------------------------------------------------
 if ( vC_MB_MainFrame == nil ) then
 	local vC_MB_MainFrame = CreateFrame("Frame", "vC_MB_MainFrame", PlayerFrame, "BackdropTemplate")
-		vC_SetBackdrop_Choice(vC_MB_MainFrame, 47, 1)
+		vC_MB_MainFrame:SetBackdrop({
+			bgFile = "Interface\\FrameGeneral\\UI-Background-Marble", tileEdge = true, tileSize = 16,
+			edgeFile = "Interface\\ToolTips\\UI-Tooltip-Border", edgeSize = 16,
+			insets = { left = 4, right = 4, top = 4, bottom = 4 },
+		})
 		vC_MB_MainFrame:EnableMouse(true)
 		vC_MB_MainFrame:SetSize(265, 34)
 		vC_MB_MainFrame:SetPoint("TOPLEFT", PlayerFrame, -53, 20)
@@ -102,7 +109,11 @@ if ( vC_MB_MainFrame == nil ) then
 			vC_MB_iStar:SetScript("OnClick", function(s) SetRaidTargetIcon("target", 1) end)
 
 	local vC_MB_PingFrame = CreateFrame("Frame", "vC_MB_PingFrame", vC_MB_MainFrame, "BackdropTemplate")
-		vC_SetBackdrop_Choice(vC_MB_PingFrame, 47, 1)
+		vC_MB_PingFrame:SetBackdrop({
+			bgFile = "Interface\\FrameGeneral\\UI-Background-Marble", tileEdge = true, tileSize = 16,
+			edgeFile = "Interface\\ToolTips\\UI-Tooltip-Border", edgeSize = 16,
+			insets = { left = 4, right = 4, top = 4, bottom = 4 },
+		})
 		vC_MB_PingFrame:EnableMouse(true)
 		vC_MB_PingFrame:SetSize(175, 35)
 		vC_MB_PingFrame:SetPoint("RIGHT", vC_MB_MainFrame, "TOPRIGHT", 0, 15)
@@ -193,18 +204,18 @@ end
 -------------------------------------------------------
 -- Register Events
 -------------------------------------------------------
-local vC_RegEv = CreateFrame("Frame")
-	vC_RegEv:RegisterEvent("ADDON_LOADED")
-	vC_RegEv:SetScript("OnEvent", function(s, e, ...)
+local vC_MB_RegEv = CreateFrame("Frame")
+	vC_MB_RegEv:RegisterEvent("ADDON_LOADED")
+	vC_MB_RegEv:SetScript("OnEvent", function(s, e, ...)
 	if ( e == "ADDON_LOADED" ) then
-		local vC_Events = {
+		local vC_MB_Events = {
 			"PLAYER_ENTERING_WORLD",		-- Action To Do When Loading into WoW
 			"GROUP_ROSTER_UPDATE",			-- Detect Group/Raid/Leader Change
 		}
-		for i = 1, #vC_Events do
-			vC_RegEv:RegisterEvent(vC_Events[i])
+		for i = 1, #vC_MB_Events do
+			vC_MB_RegEv:RegisterEvent(vC_MB_Events[i])
 		end
-		vC_RegEv:UnregisterEvent("ADDON_LOADED")
+		vC_MB_RegEv:UnregisterEvent("ADDON_LOADED")
 	end
 	if ( e == "PLAYER_ENTERING_WORLD" or e == "GROUP_ROSTER_UPDATE" ) then 
 		if ( not InCombatLockdown() ) then vC_MB_MarkingBar() end

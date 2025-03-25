@@ -1,5 +1,5 @@
 ## Title: Marking Bar
-## IconTexture: Interface/ICONS/Achievement_GarrisonFollower_ItemLevel650
+## IconTexture: Interface/MINIMAP/UI-Minimap-Ping-Rotate
 ## Name: Marking Bar
 ## Author: Vandiel-Korgath
 ## Interface: 110105
