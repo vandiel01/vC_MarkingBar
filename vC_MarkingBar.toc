@@ -1,9 +1,9 @@
 ## Title: Marking Bar
-## IconTexture: Interface/MINIMAP/UI-Minimap-Ping-Rotate
+## IconTexture: Interface/ICONS/Achievement_GarrisonFollower_ItemLevel650
 ## Name: Marking Bar
 ## Author: Vandiel-Korgath
 ## Interface: 110105
-## Version: 1.0
+## Version: 1.1
 
 ## Category-enUS: .Van's Quality of Life
 ## Notes-enUS: Mark the target, assist the tank, drop a ping!
