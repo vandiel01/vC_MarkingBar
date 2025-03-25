@@ -19,7 +19,7 @@ function vC_MB_MarkingBar()
 	end
 end
 -------------------------------------------------------
--- Quick and Simple Tooltips
+-- Marking Bar Frame and Icons
 -------------------------------------------------------
 function vC_MB_ToolTips(f, c, a1)
 	GameTooltip:ClearLines()
@@ -31,9 +31,6 @@ function vC_MB_ToolTips(f, c, a1)
 	GameTooltip:AddLine(a1)
 	GameTooltip:Show()
 end
--------------------------------------------------------
--- Marking Bar Frame and Icons
--------------------------------------------------------
 if ( vC_MB_MainFrame == nil ) then
 	local vC_MB_MainFrame = CreateFrame("Frame", "vC_MB_MainFrame", PlayerFrame, "BackdropTemplate")
 		vC_MB_MainFrame:SetBackdrop({
@@ -204,18 +201,18 @@ end
 -------------------------------------------------------
 -- Register Events
 -------------------------------------------------------
-local vC_MB_RegEv = CreateFrame("Frame")
-	vC_MB_RegEv:RegisterEvent("ADDON_LOADED")
-	vC_MB_RegEv:SetScript("OnEvent", function(s, e, ...)
+local vC_RegEv = CreateFrame("Frame")
+	vC_RegEv:RegisterEvent("ADDON_LOADED")
+	vC_RegEv:SetScript("OnEvent", function(s, e, ...)
 	if ( e == "ADDON_LOADED" ) then
-		local vC_MB_Events = {
+		local vC_Events = {
 			"PLAYER_ENTERING_WORLD",		-- Action To Do When Loading into WoW
 			"GROUP_ROSTER_UPDATE",			-- Detect Group/Raid/Leader Change
 		}
-		for i = 1, #vC_MB_Events do
-			vC_MB_RegEv:RegisterEvent(vC_MB_Events[i])
+		for i = 1, #vC_Events do
+			vC_RegEv:RegisterEvent(vC_Events[i])
 		end
-		vC_MB_RegEv:UnregisterEvent("ADDON_LOADED")
+		vC_RegEv:UnregisterEvent("ADDON_LOADED")
 	end
 	if ( e == "PLAYER_ENTERING_WORLD" or e == "GROUP_ROSTER_UPDATE" ) then 
 		if ( not InCombatLockdown() ) then vC_MB_MarkingBar() end
